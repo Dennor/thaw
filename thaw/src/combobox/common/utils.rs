@@ -27,7 +27,7 @@ pub fn get_dropdown_action_from_key(
         || KeyboardKey::Enter == code
         || (!multiselect && KeyboardKey::Space == code)
     {
-        DropdownAction::CloseSelect
+        DropdownAction::Type
     } else if multiselect && KeyboardKey::Space == code {
         DropdownAction::Select
     } else if KeyboardKey::Escape == code {
@@ -68,7 +68,7 @@ pub enum DropdownAction {
     Tab,
 }
 
-enum KeyboardKey {
+pub enum KeyboardKey {
     ArrowDown,
     ArrowUp,
     Enter,
