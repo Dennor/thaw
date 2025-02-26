@@ -1,4 +1,4 @@
-use super::utils::{get_dropdown_action_from_key, DropdownAction};
+use super::utils::{get_dropdown_action_from_key, DropdownAction, KeyboardKey};
 use crate::_aria::ActiveDescendantController;
 use leptos::{context::Provider, ev, html, prelude::*};
 use std::sync::Arc;
@@ -70,11 +70,12 @@ pub fn listbox_keyboard_event(
 
     match action {
         DropdownAction::Type | DropdownAction::Open => {
-            if !open {
+            let opened = !open;
+            if opened {
                 set_open.set(true);
             }
-            if action == DropdownAction::Open {
-                e.prevent_default();
+            if action == DropdownAction::Open && (opened || KeyboardKey::Space != e.code()) {
+               e.prevent_default();
             }
         }
         DropdownAction::CloseSelect | DropdownAction::Select => {

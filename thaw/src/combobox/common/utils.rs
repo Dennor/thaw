@@ -21,7 +21,11 @@ pub fn get_dropdown_action_from_key(
         {
             DropdownAction::Open
         } else {
-            DropdownAction::None
+            if KeyboardKey::Space == code {
+                DropdownAction::Type
+            } else {
+                DropdownAction::None
+            }
         }
     } else if (KeyboardKey::ArrowUp == code && alt_key)
         || KeyboardKey::Enter == code
@@ -68,7 +72,7 @@ pub enum DropdownAction {
     Tab,
 }
 
-enum KeyboardKey {
+pub enum KeyboardKey {
     ArrowDown,
     ArrowUp,
     Enter,
